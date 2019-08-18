@@ -86,7 +86,7 @@ analytics:
 author:
   name             : "Marc van der Valk" # changed
   avatar           : "/images/bio-pic.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Python - Data Analysis - Data Science Portfolio" #changed
+  bio              : "Python - Data Science Portfolio" #changed
   location         : "Netherlands" # changed
   email            :
   uri              :

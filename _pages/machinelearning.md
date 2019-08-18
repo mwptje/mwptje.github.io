@@ -1,10 +1,10 @@
 ---
 layout: posts
-permalink: /data-wrangling/
-title: "Data Wrangling projects"
+permalink: /data-science/
+title: "Data Science projects"
 author_profile: true
 header:
-  image: "/images/fort point.png"
+  image: "/images/rotterdam_erasmus_brug.jpg"
 ---
 
 

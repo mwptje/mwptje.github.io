@@ -1,9 +1,9 @@
 ---
 title: "Capstone Project"
-date: 2019-08-19
+date: 2019-02-23
 tags: [data wrangling, data science, messy data]
 header:
-  image: "/images/perceptron/percept.jpg"
+  image: "/images/capstone/rohan-makhecha-unsplash.jpg"
 excerpt: "Data Wrangling, Data Science, Messy Data"
 mathjax: "true"
 ---
@@ -17,8 +17,6 @@ mathjax: "true"
   * [Foursquare API data - Venue Details](#foursquare)
 * [Data Exploration / Methodology](#methodology)
 * [Analysis](#analysis)
-
-**Note**: The results, discussion and conclusion sections are included in the report under the same github section
 
 ## Introduction / Business Problem <a name="intro"></a>
 
@@ -599,7 +597,7 @@ for lat, lng, cdn_number, neighborhood in zip(df_toronto_nbh['Latitude'], df_tor
 map_toronto.save('toronto_map.html')
 ```
 
-<img src='./toronto_map.jpeg'/>
+<img src='/images/capstone/toronto_map.jpeg'/>
 
 ## Foursquare API data - Venue Details <a name="foursquare" />
 
@@ -1497,7 +1495,7 @@ map_toronto.save('toronto_map_inc.html')
 #map_toronto
 ```
 
-<img src='toronto_map_inc.jpeg'/>
+<img src='/images/capstone/toronto_map_inc.jpeg'/>
 
 ### Average household income after tax by neighbourhood
 
@@ -1994,7 +1992,7 @@ map_toronto_clu.save('toronto_map_clu.html')
 #map_toronto_clu
 ```
 
-<img src="toronto_map_clu2.jpeg"/>
+<img src="/images/capstone/toronto_map_clu2.jpeg"/>
 
 **Legend**: (including initial analysis on the clustering results after looking at the map)
   1. Red = Cluster 0<br>- Most prominent, grouped around the downtown area

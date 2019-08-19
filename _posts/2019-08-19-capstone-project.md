@@ -53,7 +53,7 @@ As the types of small businesses are manifold, this project will restrict the de
 **Note**: only further analysis in the next stage after gathering the data will prove which machine learning method is better suited to use
 
 
-"`python
+```python
 # import the necessary libraries
 import os
 import numpy as np # library to handle data in a vectorized manner
@@ -81,7 +81,7 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 # show plots inline
 %matplotlib inline
-"`
+```
 
 ## Data Section <a name="data"/>
 
@@ -107,7 +107,7 @@ I have chosen to look at the neighbourhoods in the former city of Toronto for th
 ### Example data:
 
 
-"`python
+```python
 # convert the neighbourhood's boundaries shapefile to a geopandas dataframe
 df_toronto_nbh_geo = gpd.read_file('./data/NEIGHBORHOODS_WGS84.shp')
 # rename the columns
@@ -121,7 +121,7 @@ df_toronto_nbh_geo['Longitude'] = df_toronto_nbh_geo['geometry'].centroid.x
 # display the dimensions and first five rows
 print('Dimensions: ', df_toronto_nbh_geo.shape)
 df_toronto_nbh_geo.head()
-"`
+```
 
     Dimensions:  (140, 5)
 
@@ -215,7 +215,7 @@ attribute called centroid.
   * **Borough**: Former city or borough
 
 
-"`python
+```python
 # read the table in the Wikipedia page
 df_toronto_nbh_bor = pd.read_html('https://en.wikipedia.org/wiki/List_of_city-designated_neighbourhoods_in_Toronto')[0]
 # remove columns not needed and rename the remaining
@@ -227,7 +227,7 @@ df_toronto_nbh_bor['CDN_Number'] = df_toronto_nbh_bor['CDN_Number'].apply(zero_f
 # display the dimensions and first five rows
 print('Dimensions: ', df_toronto_nbh_bor.shape)
 df_toronto_nbh_bor.head()
-"`
+```
 
     Dimensions:  (140, 3)
 
@@ -320,7 +320,7 @@ df_toronto_nbh_bor.head()
 ### Example data:
 
 
-"`python
+```python
 # read the 2014 statistics excel file
 df_toronto_nbh_sta = pd.read_excel('./data/wellbeing_toronto_2014.xlsx')
 # remove unwanted columns
@@ -337,7 +337,7 @@ df_toronto_nbh_sta['CDN_Number'] = df_toronto_nbh_sta['CDN_Number'].apply(zero_f
 # add column with population density
 df_toronto_nbh_sta['PopulationDensity'] = round(df_toronto_nbh_sta['TotalPopulation']/df_toronto_nbh_sta['TotalArea'],0)
 df_toronto_nbh_sta.head()
-"`
+```
 
 
 
@@ -449,7 +449,7 @@ df_toronto_nbh_sta.head()
   After removing several (duplicate) columns, the following columns are available as shown below:
 
 
-"`python
+```python
 # Now join the three dataframes
 df_toronto_nbh_tmp = pd.merge(left=df_toronto_nbh_geo,right=df_toronto_nbh_bor,on='CDN_Number')
 df_toronto_nbh_tmp = df_toronto_nbh_tmp[df_toronto_nbh_tmp['Borough'] == 'Old City of Toronto']
@@ -462,7 +462,7 @@ df_toronto_nbh.sort_values('Neighbourhood',inplace=True)
 df_toronto_nbh.reset_index(drop=True,inplace=True)
 print('Dimensions: ',df_toronto_nbh.shape)
 df_toronto_nbh.head()
-"`
+```
 
     Dimensions:  (44, 9)
 
@@ -571,7 +571,7 @@ df_toronto_nbh.head()
   Each neighbourhood is shown with a boundary and a color varying from yellow to red, depending on the population<br>   density by square kilometer. This is a preliminary exploration into the data we have gathered.
 
 
-"`python
+```python
 # create map of Toronto Neighbourhoods (FSAs) using retrived latitude and longitude values
 map_toronto = folium.Map(location=[43.673963, -79.387207], zoom_start=12);
 toronto_geojson = "./data/toronto_neighbourhoods.json"
@@ -597,7 +597,7 @@ for lat, lng, cdn_number, neighborhood in zip(df_toronto_nbh['Latitude'], df_tor
         #fill_color='#3186cc',
         fill_opacity=0.7).add_to(map_toronto)  
 map_toronto.save('toronto_map.html')
-"`
+```
 
 <img src='./toronto_map.jpeg'/>
 
@@ -608,12 +608,12 @@ This data can then be combined with the FSA statistical data
 to be used by the chosen machine learning algorithm to provide insight in business location
 
 
-"`python
+```python
 # Set up Foursqaure API credentials
 CLIENT_ID = '<client id here>' # your Foursquare ID
 CLIENT_SECRET = '<client credentials here>' # your Foursquare Secret
 VERSION = '20180605' # Foursquare API version
-"`
+```
 
 ### 5. Foursquare Venue Categories:
  
@@ -633,7 +633,7 @@ VERSION = '20180605' # Foursquare API version
   The top level category will be used to categorize venues on a top level as well
 
 
-"`python
+```python
 # build the request to retrieve the Foursquare venue catagories
 url = 'https://api.foursquare.com/v2/venues/categories?&client_id={}&client_secret={}&v={}'.format(
    CLIENT_ID, 
@@ -667,7 +667,7 @@ else:
     df_cats.to_csv('data/foursquare_categories.csv')
     
 df_cats.head()
-"`
+```
 
 
 
@@ -747,7 +747,7 @@ df_cats.head()
 ### Get the venues by neighbourhood using the Foursquare API explore endpoint
 
 
-"`python
+```python
 def get_nearby_venues(cdns, neighbourhoods, latitudes, longitudes, radius=1000):
     
     venues_list=[]
@@ -775,7 +775,7 @@ def get_nearby_venues(cdns, neighbourhoods, latitudes, longitudes, radius=1000):
             venues_list.append([cdn,neighbourhood,vnam,vlat,vlng,vcat])            
 
     return(venues_list)
-"`
+```
 
 ### Process retrieving venues by neighbourhood
 
@@ -785,7 +785,7 @@ def get_nearby_venues(cdns, neighbourhoods, latitudes, longitudes, radius=1000):
   will be verified and if necessary set to the correct neighbourhood
 
 
-"`python
+```python
 LIMIT = 200 # limit of number of venues returned by Foursquare API
 radius = 1000 # define radius in meters
 # call the API explore endpoint for each neighbourhood
@@ -794,7 +794,7 @@ venues_list = get_nearby_venues(cdns=df_toronto_nbh['CDN_Number'],
                                 latitudes=df_toronto_nbh['Latitude'],
                                 longitudes=df_toronto_nbh['Longitude']
                                )
-"`
+```
 
     095 - Annex 
     076 - Bay Street Corridor 
@@ -845,7 +845,7 @@ venues_list = get_nearby_venues(cdns=df_toronto_nbh['CDN_Number'],
 ### Build the venues dataframe from the venues list and rename the columns
 
 
-"`python
+```python
 # build the dataframe from the venues list
 df_toronto_ven = pd.DataFrame.from_records(venues_list)
 # rename the columns
@@ -858,7 +858,7 @@ df_toronto_ven.columns = ['CDN_Number',
 # display the first 5 rows
 print('Dimensions: ', df_toronto_ven.shape)
 df_toronto_ven.head()
-"`
+```
 
     Dimensions:  (3411, 6)
 
@@ -947,11 +947,11 @@ df_toronto_ven.head()
 ### Add the category column based on a dictionary lookup using the Foursquare categories dataframe
 
 
-"`python
+```python
 dict_cats = dict(zip(df_cats['Subcategory'],df_cats['Category']))
 df_toronto_ven['Category'] = df_toronto_ven['SubCategory'].map(dict_cats)
 df_toronto_ven.head()
-"`
+```
 
 
 
@@ -1047,7 +1047,7 @@ df_toronto_ven.head()
   with these boundaries and can be used to verify the venues geo-location.
 
 
-"`python
+```python
 # loop at all the venues
 drop_index_list = []
 corrected = 0
@@ -1072,12 +1072,12 @@ for i,ven in df_toronto_ven.iterrows():
             break
     if found == False:
         drop_index_list.append(i)
-"`
+```
 
 ### Report the corrections here and drop any venues that are out of bounds ...
 
 
-"`python
+```python
 # log the updates and drop rows that are not within any boundaries
 print(df_toronto_ven.shape[0], 'venues checked')
 # how many venues have had their neighbourhood reassigned
@@ -1090,7 +1090,7 @@ if len(drop_index_list) > 0:
     df_toronto_ven.reset_index(drop=True,inplace=True)
 # show what is left ...
 print(df_toronto_ven.shape[0], 'venues remaining')
-"`
+```
 
     3411 venues checked
     1491  venues corrected
@@ -1104,9 +1104,9 @@ that the Foursquare API endpoint "explore" only accepts a radius from a central 
 being outside of the neighbourhood. 76 venues where entirely outside of the neighbourhoods and have been removed
 
 
-"`python
+```python
 df_toronto_ven.head()
-"`
+```
 
 
 
@@ -1202,7 +1202,7 @@ categories - subcategories list. Therefore this needs to be corrected as well. H
 as quite a lot of code is necessary to fix this<br>
 
 
-"`python
+```python
 # fix the Category column based on certain key words in the subcategory
 def fix_category(row):
     #print(pd.isna(row['Category']))
@@ -1288,10 +1288,10 @@ def fix_category(row):
     else:
         return row['Category']
 
-"`
+```
 
 
-"`python
+```python
 # fix the venue catagories by first creating a new column and then replacing the old one
 df_toronto_ven['New Cat'] = df_toronto_ven.apply(lambda x: fix_category(x),axis=1)
 # remove any rows where the subcategory is Neighborhood
@@ -1300,7 +1300,7 @@ df_toronto_ven = df_toronto_ven.query('SubCategory != "Neighborhood"')
 df_toronto_ven.to_csv('df_toronto_ven_after.csv')
 # do we have any rows left without a category?
 df_toronto_ven[df_toronto_ven['New Cat'].isnull()]
-"`
+```
 
 
 
@@ -1345,7 +1345,7 @@ df_toronto_ven[df_toronto_ven['New Cat'].isnull()]
 One last step to replace the Category column with the "fixed" categories in column "New Cat"
 
 
-"`python
+```python
 # repair the Category column with the "New Cat" column and then drop "New Cat"
 df_toronto_ven['Category'] = df_toronto_ven['New Cat']
 df_toronto_ven.drop(columns=['New Cat'],inplace=True)
@@ -1353,7 +1353,7 @@ df_toronto_ven.sort_values(by=['Neighbourhood','Category','SubCategory'],inplace
 df_toronto_ven.reset_index(drop=True,inplace=True)
 # final look
 df_toronto_ven.head()
-"`
+```
 
 
 
@@ -1449,14 +1449,14 @@ df_toronto_ven.head()
   To get a general idea, let's see how many venue categories we have found by neighbourhood
 
 
-"`python
+```python
 nhb_count = len(df_toronto_ven['Neighbourhood'].unique())
 sub_count = len(df_toronto_ven['SubCategory'].unique())
 cat_count = len(df_toronto_ven['Category'].unique())
 ven_count = df_toronto_ven.shape[0]
 print('{} top level categories with {} unique venue categories found across {} neighbourhoods\n{} venues in total'.format(
     cat_count,sub_count,nhb_count,ven_count))
-"`
+```
 
     8 top level categories with 281 unique venue categories found across 44 neighbourhoods
     3331 venues in total
@@ -1468,7 +1468,7 @@ print('{} top level categories with {} unique venue categories found across {} n
 * This should give some insight to the analysis of the K-Means clustering further on down
 
 
-"`python
+```python
 # create map of Toronto Neighbourhoods (FSAs) using retrived latitude and longitude values
 map_toronto = folium.Map(location=[43.673963, -79.387207], zoom_start=12);
 toronto_geojson = "./data/toronto_neighbourhoods.json"
@@ -1495,7 +1495,7 @@ for lat, lng, cdn_number, neighborhood in zip(df_toronto_nbh['Latitude'], df_tor
         fill_opacity=0.7).add_to(map_toronto)  
 map_toronto.save('toronto_map_inc.html')
 #map_toronto
-"`
+```
 
 <img src='toronto_map_inc.jpeg'/>
 
@@ -1512,14 +1512,14 @@ would not be reflected in the incomes of the people working in these areas.
 ### Let's have a look at a graph of the population density and after tax income by neighbourhood
 
 
-"`python
+```python
 sns.set_style('whitegrid')
 df_toronto_bar = pd.DataFrame(df_toronto_nbh[['Neighbourhood','PopulationDensity','AfterTaxHouseholdIncome']]).copy()
 df_toronto_bar.set_index('Neighbourhood',inplace=True)
 fig = df_toronto_bar.plot(kind='bar',figsize=(16,8)).get_figure()
 fig.savefig('toronto_inc_bar.png')
 plt.show()
-"`
+```
 
 
 ![png](Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_files/Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_57_0.png)
@@ -1537,7 +1537,7 @@ small compared to the others. Forest Hill North & South are similar neighbourhoo
 to retrieve more. 
 
 
-"`python
+```python
 sns.set_style('whitegrid')
 plt.figure(figsize=(12,8))
 count_plt = sns.countplot(x="Neighbourhood", data=df_toronto_ven, palette='Greens_d') #,height=12, aspect=0.8)
@@ -1546,7 +1546,7 @@ count_plt.set_xticklabels(count_plt.get_xticklabels(), rotation=90)
 count_plt.set_title("Number of Venues by Neighbourhood")
 plt.show()
 count_plt.figure.savefig('tornto_ven_by_nbh.png')
-"`
+```
 
 
 ![png](Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_files/Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_59_0.png)
@@ -1567,7 +1567,7 @@ possible to categorize the clusters as found by the K-Means clustering algorithm
   * Then used this dataframe to create a dataframe representing the percentage of venues for a category by neighbourhood
 
 
-"`python
+```python
 # get the venue category count by neighbourhood to add to the neighbourhoods dataframe
 df_toronto_onehot = pd.get_dummies(df_toronto_ven[['Category']], prefix="", prefix_sep="")
 # add neighbourhood column back to dataframe
@@ -1578,13 +1578,13 @@ df_toronto_onehot['Neighbourhood'] = df_toronto_ven['Neighbourhood']
 fixed_columns = [df_toronto_onehot.columns[-1]] + list(df_toronto_onehot.columns[:-1])
 df_toronto_onehot = df_toronto_onehot[fixed_columns]
 df_toronto_grp = df_toronto_onehot.groupby('Neighbourhood').mean().reset_index()
-"`
+```
 
 ### Add the normalized (between 0 and 1) population denstity and avg. income by neighbourhood ...
   * Add the columns to the df_toronto_grp dataframe after normalizing 
 
 
-"`python
+```python
 # we need to reset the index before using the dataframe to normalize the attributes
 df_toronto_bar.reset_index(inplace=True)
 # add the population density and average household income as well and normalize between 0 and 1
@@ -1597,7 +1597,7 @@ x_scaled = min_max_scaler.fit_transform(x) #.reshape(-1,1))
 # add the columns to the grouped by category
 df_toronto_grp[['PopulationDensity','AfterTaxHouseholdIncome']] = pd.DataFrame(x_scaled,columns=['PopulationDensity','AfterTaxHouseholdIncome'])
 df_toronto_grp.head()
-"`
+```
 
 
 
@@ -1715,7 +1715,7 @@ df_toronto_grp.head()
   * We are looking for a number of clusters where the inertia visibly flattens out
 
 
-"`python
+```python
 # now get the optimal K
 ks = range(2, 14)
 inertias = []
@@ -1739,7 +1739,7 @@ plt.ylabel('inertia')
 plt.xticks(ks)
 plt.show()
 fig.savefig('kmeans_elbow_diagram.png')
-"`
+```
 
 
 ![png](Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_files/Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_65_0.png)
@@ -1752,7 +1752,7 @@ fig.savefig('kmeans_elbow_diagram.png')
 Now run K-Means on the normalized columns of the venues grouped dataframe df_toronto_grp
 
 
-"`python
+```python
 # set number of clusters as determined in the elbow plot above
 kclusters = 7
 #df_toronto_grp_clu = df_toronto_grp.drop('Neighbourhood', 1)
@@ -1760,7 +1760,7 @@ kclusters = 7
 kmeans = KMeans(n_clusters=kclusters, random_state=0).fit(df_toronto_grp.drop(columns=['Neighbourhood']))
 # check cluster labels generated for each row in the dataframe
 kmeans.labels_ 
-"`
+```
 
 
 
@@ -1778,12 +1778,12 @@ kmeans.labels_
   * Plot the merged dataframe using Choropleth to view the results of the K-Means clustering
 
 
-"`python
+```python
 df_toronto_grp.insert(loc=0, column='Cluster Labels', value=kmeans.labels_)
 # now merge both to one dataframe
 df_toronto_mrg = pd.merge(left=df_toronto_nbh,right=df_toronto_grp, on='Neighbourhood')
 df_toronto_mrg.head()
-"`
+```
 
 
 
@@ -1959,7 +1959,7 @@ df_toronto_mrg.head()
   * With this plot is should be easier to discover the patterns in the clustering assignment
 
 
-"`python
+```python
 import matplotlib.cm as cm
 import matplotlib.colors as colors
 # create map
@@ -1992,7 +1992,7 @@ for lat, lon, poi, cluster in zip(df_toronto_mrg['Latitude'], df_toronto_mrg['Lo
         fill_opacity=0.3).add_to(map_toronto_clu) 
 map_toronto_clu.save('toronto_map_clu.html')
 #map_toronto_clu
-"`
+```
 
 <img src="toronto_map_clu2.jpeg"/>
 
@@ -2011,13 +2011,13 @@ map_toronto_clu.save('toronto_map_clu.html')
   * This plot should also be helpful in detecting patterns behind the clustering assignment
 
 
-"`python
+```python
 # get the number of venues by category by neighbourhood
 df_toronto_grp_cnt = df_toronto_ven.groupby(by=['Neighbourhood','Category']).size().unstack(fill_value=0)
 df_toronto_grp_cnt.insert(loc=0, column='Cluster Labels', value=kmeans.labels_)
 df_toronto_grp_cnt.sort_values(by=['Cluster Labels','Neighbourhood'],inplace=True)
 df_toronto_grp_cnt.head()
-"`
+```
 
 
 
@@ -2133,7 +2133,7 @@ df_toronto_grp_cnt.head()
 ### Plot the number of venues by category by neighbourhood
 
 
-"`python
+```python
 # plot the number of venues by category in a stacked bar plot by neighbourhood
 wid_nbh = 0.5
 cum_val = 0
@@ -2149,7 +2149,7 @@ _ = plt.yticks(np.arange(0, 120, 10))
 _ = plt.legend(fontsize=10)
 plt.show()
 fig.savefig('toronto_venues_by_nbh.png')
-"`
+```
 
 
 ![png](Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_files/Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_77_0.png)
@@ -2193,7 +2193,7 @@ fig.savefig('toronto_venues_by_nbh.png')
 ### Create a dataframe to visualize the venue categories by venue count by neighbourhood
 
 
-"`python
+```python
 # create a sorted list for each neighbourhood with the category with highest number of venues first
 # loop at the neighbourhoods 
 nbh_dict = dict()
@@ -2232,7 +2232,7 @@ df_toronto_grp_cnt_srt.columns = columns
 df_toronto_grp_cnt_srt.reset_index(inplace=True)
 df_toronto_grp_cnt_srt.rename(columns={'index':'Neighbourhood'},inplace=True)
 df_toronto_grp_cnt_srt.head()
-"`
+```
 
 
 
@@ -2384,7 +2384,7 @@ df_toronto_grp_cnt_srt.head()
 #### We will use this dataframe to merge with the clusters by neighbourhoods dataframe to have one dataframe for analysis
 
 
-"`python
+```python
 # add the cluster number, population density and average income so we can do some analysis on the clusters
 df_toronto_analize = pd.merge(left=df_toronto_mrg[['Neighbourhood','Cluster Labels','AfterTaxHouseholdIncome_x','PopulationDensity_x']],
                               right=df_toronto_grp_cnt_srt,
@@ -2394,7 +2394,7 @@ df_toronto_analize.rename(columns={'Cluster Labels':'Cluster','AfterTaxHousehold
 df_toronto_analize.sort_values(by=['Cluster','Neighbourhood']).to_csv('df_toronto_analize.csv')
 df_toronto_analize.sort_values(by=['Cluster','Neighbourhood'],inplace=True)
 df_toronto_analize
-"`
+```
 
 
 
@@ -3461,10 +3461,10 @@ df_toronto_analize
 ### Look a the mean and medians of average income and population density
 
 
-"`python
+```python
 # look a the mean and medians of average income and population density
 df_toronto_analize[['AvgIncome','PopDensity']].describe()
-"`
+```
 
 
 

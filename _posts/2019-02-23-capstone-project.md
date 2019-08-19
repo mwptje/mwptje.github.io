@@ -8,7 +8,7 @@ excerpt: "Data Wrangling, Data Science, Messy Data"
 mathjax: "true"
 ---
 
-# Capstone Project - The Battle of Neighborhoods 
+Photo by Rohan Makhecha on Unsplash
 
 ## Contents
 * [Introduction: Business Problem](#intro)
@@ -95,11 +95,11 @@ I have chosen to look at the neighbourhoods in the former city of Toronto for th
  * **Latitude**: the latitudinal coordinate of the center of the area (centroid)
  * **Longitude**: the longitudinal coordinate of the center of the area (centroid)
  
- **Neighbourhood**: according to the website of the city of Toronto, the definition of a neighbourhood<br>
- is an area that respects existing boundaries such as service boundaries of community agencies, <br>
- natural boundaries (rivers), and man-made boundaries (streets, highways, etc.)<br>
- They are small enough for service organizations to combine them to fit within their service area.<br>
- They represent municipal planning areas as well as areas for public service like public health.<br>
+ **Neighbourhood**: according to the website of the city of Toronto, the definition of a neighbourhood
+ is an area that respects existing boundaries such as service boundaries of community agencies, 
+ natural boundaries (rivers), and man-made boundaries (streets, highways, etc.)
+ They are small enough for service organizations to combine them to fit within their service area.
+ They represent municipal planning areas as well as areas for public service like public health.
  A neighbourhood has a population roughly between 7,000 and 12,00 people.
 
 ### Example data:
@@ -115,7 +115,7 @@ fix_neighbourhood = lambda x: x.split('(')[0]
 df_toronto_nbh_geo['Neighbourhood'] = df_toronto_nbh_geo['Neighbourhood'].apply(fix_neighbourhood)
 # calculate the centers of each area 
 df_toronto_nbh_geo['Latitude'] = df_toronto_nbh_geo['geometry'].centroid.y
-df_toronto_nbh_geo['Longitude'] = df_toronto_nbh_geo['geometry'].centroid.x
+Capstone df_toronto_nbh_geo['Longitude'] = df_toronto_nbh_geo['geometry'].centroid.x
 # display the dimensions and first five rows
 print('Dimensions: ', df_toronto_nbh_geo.shape)
 df_toronto_nbh_geo.head()
@@ -1519,8 +1519,7 @@ fig.savefig('toronto_inc_bar.png')
 plt.show()
 ```
 
-
-![png](Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_files/Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_57_0.png)
+<img src='/images/capstone/toronto_inc_bar.png'/>
 
 
 **Note**: Also note that some of the neighbourhoods with a high average income have<br>
@@ -1543,11 +1542,10 @@ count_plt.set_ylabel('Number of Venues')
 count_plt.set_xticklabels(count_plt.get_xticklabels(), rotation=90)
 count_plt.set_title("Number of Venues by Neighbourhood")
 plt.show()
-count_plt.figure.savefig('tornto_ven_by_nbh.png')
+count_plt.figure.savefig('toronto_ven_by_nbh.png')
 ```
 
-
-![png](Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_files/Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_59_0.png)
+<img src='/images/capstone/toronto_ven_by_nbh.png'/>
 
 
 ### Which machine learning algorithm to use?
@@ -1739,8 +1737,7 @@ plt.show()
 fig.savefig('kmeans_elbow_diagram.png')
 ```
 
-
-![png](Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_files/Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_65_0.png)
+<img src='/images/capstone/kmeans_elbow_diagram.png'/>
 
 
 **Note**: from the elbow graph shown above, the optimal number of clusters is around 7 as the intertia really begins to descrease
@@ -2149,8 +2146,7 @@ plt.show()
 fig.savefig('toronto_venues_by_nbh.png')
 ```
 
-
-![png](Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_files/Capstone%20Project%20-%20Week%205%20-%20Battle%20of%20the%20Neighbourhoods_77_0.png)
+<img src='/images/capstone/toronto_venues_by_nbh.png'/>
 
 
 ### Several observations here:

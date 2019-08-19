@@ -1,14 +1,19 @@
 ---
 title: "Capstone Project"
 date: 2019-02-23
-tags: [data wrangling, data science, messy data]
+tags: [data science, data wrangling, python, geo-location]
 header:
   image: "/images/capstone/rohan-makhecha-unsplash.jpg"
-excerpt: "Data Wrangling, Data Science, Messy Data"
+excerpt: "Data Wrangling, Data Science, Python, Geo-location"
 mathjax: "true"
 ---
+Image by Rohan Makhecha on Unsplash
 
-Photo by Rohan Makhecha on Unsplash
+## Battle of the Neighbourhoods
+Using unsupervised machine learning to categorize neighbourhoods for locating
+certain businesses in the city of Toronto.
+
+Project uses: Python, Jupyter Notebook, Geo-location
 
 ## Contents
 * [Introduction: Business Problem](#intro)
@@ -44,8 +49,8 @@ As the types of small businesses are manifold, this project will restrict the de
  * Higher average income: possible customers with more money to spend
  * There are statistics available on average income by neighbourhood. 
 
-  **This project will attempt to combine the above factors to build a clustering and/or recommendation model<br>
-  for the best areas for locating certain businesses. The recommendation(s) given by the model should help<br>
+  **This project will attempt to combine the above factors to build a clustering and/or recommendation model
+  for the best areas for locating certain businesses. The recommendation(s) given by the model should help
   the (future) business owner to make a more informed decision**
 
 **Note**: only further analysis in the next stage after gathering the data will prove which machine learning method is better suited to use
@@ -199,10 +204,9 @@ df_toronto_nbh_geo.head()
 
 
 
-**Note**:In the case of the neighbourhoods geospatial data no data cleansing is necessary, other than removing<br>
-removing the CDN number from the description. I have renamed the columns to be consistent.<br>
-The centeral geo-coordinates for each neighbourhood have also been calculated using a geopandas geometry<br>
-attribute called centroid.
+**Note**:In the case of the neighbourhoods geospatial data no data cleansing is necessary, other than removing
+removing the CDN number from the description. I have renamed the columns to be consistent.
+The centeral geo-coordinates for each neighbourhood have also been calculated using a geopandas geometry attribute called centroid.
 
 ### 2. Wikipedia table containing neighbourhoods by former city / borough
 
@@ -293,9 +297,9 @@ df_toronto_nbh_bor.head()
 
 
 
-  **Note**: In the case of the wikipedia list of neighbourhoods in Toronto, there are now missing values.<br>
-  To be consistant, I have reformated the CDN number to a zero-fill 3 digit number.<br>
-  Just to make sure I compared the CDN numbers and neighbourhood names to the neighbourhood<br>
+  **Note**: In the case of the wikipedia list of neighbourhoods in Toronto, there are now missing values.
+  To be consistant, I have reformated the CDN number to a zero-fill 3 digit number.
+  Just to make sure I compared the CDN numbers and neighbourhood names to the neighbourhood
   geospatial file and there were no differences. The number of rows (read neighbourhoods is the same)
 
 ### 3. Toronto Population Statistics by Neighbourhood
@@ -418,10 +422,10 @@ df_toronto_nbh_sta.head()
 
 
 
-  **Note**: There were no empty values in this table and the number of rows compared with the previous<br>
-  neighbourhood files. To be consistent, I have reformatted the CDN number to a zero-fill 3 digit number.<br>
-  Just to make sure I compared the CDN numbers and neighbourhood names to the neighbourhood <br>
-  geospatial file and there were no differences. A population density column was calculated by dividing<br>
+  **Note**: There were no empty values in this table and the number of rows compared with the previous
+  neighbourhood files. To be consistent, I have reformatted the CDN number to a zero-fill 3 digit number.
+  Just to make sure I compared the CDN numbers and neighbourhood names to the neighbourhood 
+  geospatial file and there were no differences. A population density column was calculated by dividing
   the total population by the total area of the neighbourhood.
 
 ### 4. Combined table with neighbourhood as key
@@ -443,7 +447,7 @@ df_toronto_nbh_sta.head()
 
 ### Example data:
 
-  Only the neighbourhoods in the former city of Toronto have been retained<br>
+  Only the neighbourhoods in the former city of Toronto have been retained
   After removing several (duplicate) columns, the following columns are available as shown below:
 
 
@@ -566,7 +570,7 @@ df_toronto_nbh.head()
 
 ### Display the neighbourhoods on a map of Toronto by population density
 
-  Each neighbourhood is shown with a boundary and a color varying from yellow to red, depending on the population<br>   density by square kilometer. This is a preliminary exploration into the data we have gathered.
+  Each neighbourhood is shown with a boundary and a color varying from yellow to red, depending on the population density by square kilometer. This is a preliminary exploration into the data we have gathered.
 
 
 ```python
@@ -618,11 +622,11 @@ VERSION = '20180605' # Foursquare API version
   Each venue on Foursqaure has been assigned to a category.
   This is is the lowest level category that is used by Foursqaure.
   
-  Foursqaure usually has two levels of categories, the top level like Food, Arts & Entertainment etc.<br>
-  Under each category there are several sub-categories.<br>
+  Foursqaure usually has two levels of categories, the top level like Food, Arts & Entertainment etc.
+  Under each category there are several sub-categories.
   For example Food has a long list of sub-categories including different restaurant types, cafes etc.
   
-  There is a special entry point in the Foursqaure API to retrieve all categories and sub-categories.<br>
+  There is a special entry point in the Foursqaure API to retrieve all categories and sub-categories.
   This data will be stored in a table with the following fields:
   
   * **Category**: top level Foursquare venue catagory
@@ -726,7 +730,7 @@ df_cats.head()
 
 ### 6. Foursquare Venues by Neighbourhood
 
-  Use the Foursquare Venue Explore API endpoint to gather basic data on venues<br>
+  Use the Foursquare Venue Explore API endpoint to gather basic data on venues
   with a certain radius based on the central coordinates for the area. 
   
   The data retrieed in JSON format will be stored in a dataframe with the following columns:
@@ -739,7 +743,7 @@ df_cats.head()
   * **Subcategory**: Lower level category name for the venue
   * **Category**: Highest level category , this will be added later
 
-  **Note**: the venue category will be added to the dataframe using the Foursquare's categories dataframe (5)<br>
+  **Note**: the venue category will be added to the dataframe using the Foursquare's categories dataframe (5)
   **Note**: the venue CDN number and neighbourhood will be checked against the neighbourhoods boundaries
 
 ### Get the venues by neighbourhood using the Foursquare API explore endpoint
@@ -777,9 +781,9 @@ def get_nearby_venues(cdns, neighbourhoods, latitudes, longitudes, radius=1000):
 
 ### Process retrieving venues by neighbourhood
 
-  Loop through the neighbourhood dataframe to get the venues within a certain radius<br>
-  of the center coordinates of each neighbourhood. Due to the fact that using a radius might<br>
-  cause the API to get venues just outside of the current neighbourhood. All the venues found<br>
+  Loop through the neighbourhood dataframe to get the venues within a certain radius
+  of the center coordinates of each neighbourhood. Due to the fact that using a radius might
+  cause the API to get venues just outside of the current neighbourhood. All the venues found
   will be verified and if necessary set to the correct neighbourhood
 
 
@@ -1040,8 +1044,8 @@ df_toronto_ven.head()
 
 ### Check for the correct neighbourhood to each venue and correct if necessary
 
-  The geopandas dataframe has a method to check if a geo-coordinate is with in the boundaries<br>
-  of an area, in this case neighbourhood boundaries. The df_toronto_nbh dataframe has a column<br>
+  The geopandas dataframe has a method to check if a geo-coordinate is with in the boundaries
+  of an area, in this case neighbourhood boundaries. The df_toronto_nbh dataframe has a column
   with these boundaries and can be used to verify the venues geo-location.
 
 
@@ -1097,8 +1101,8 @@ print(df_toronto_ven.shape[0], 'venues remaining')
 
 
 ### Display venues dataframe after assigning the correct neighbourhood
-**Note**: As reported almost half of neighbourhood of all venues has been corrected. This is due to the fact<br>
-that the Foursquare API endpoint "explore" only accepts a radius from a central point, which can lead to a venue<br>
+**Note**: As reported almost half of neighbourhood of all venues has been corrected. This is due to the fact
+that the Foursquare API endpoint "explore" only accepts a radius from a central point, which can lead to a venue
 being outside of the neighbourhood. 76 venues where entirely outside of the neighbourhoods and have been removed
 
 
@@ -1195,9 +1199,9 @@ df_toronto_ven.head()
 
 ### Missing categories
 
-One thing I noticed is that not all the venue subcategories were found according to the Foursquare<br>
-categories - subcategories list. Therefore this needs to be corrected as well. Here is where the fun begins<br>
-as quite a lot of code is necessary to fix this<br>
+One thing I noticed is that not all the venue subcategories were found according to the Foursquare
+categories - subcategories list. Therefore this needs to be corrected as well. Here is where the fun begins
+as quite a lot of code is necessary to fix this
 
 
 ```python
@@ -1499,12 +1503,12 @@ map_toronto.save('toronto_map_inc.html')
 
 ### Average household income after tax by neighbourhood
 
-The neighbourhoods in the north of Toronto like Lawrence Park South and North are the high income neighbourhoods<br>
-Also visible is that neighbourhoods closer to the lakeside have a higher average income as well as those on<br>
-the edges of the city. In the central part of Toronto there are neighbourhoods with lesser average income.<br>
+The neighbourhoods in the north of Toronto like Lawrence Park South and North are the high income neighbourhoods
+Also visible is that neighbourhoods closer to the lakeside have a higher average income as well as those on
+the edges of the city. In the central part of Toronto there are neighbourhoods with lesser average income.
 
-For the small businesses within the centeral neighbourhoods of Toronto this doesn't necessarily mean that there<br>
-is lesser spending power, as there are potentially more offices in the area. The average neighbourhood income<br>
+For the small businesses within the centeral neighbourhoods of Toronto this doesn't necessarily mean that there
+is lesser spending power, as there are potentially more offices in the area. The average neighbourhood income
 would not be reflected in the incomes of the people working in these areas.
 
 ### Let's have a look at a graph of the population density and after tax income by neighbourhood
@@ -1522,15 +1526,15 @@ plt.show()
 <img src='/images/capstone/toronto_inc_bar.png'/>
 
 
-**Note**: Also note that some of the neighbourhoods with a high average income have<br>
+**Note**: Also note that some of the neighbourhoods with a high average income have
 a lower population density, which could mean a spacious suburb with large housing plots
 
 ### Number of Venues by Neighbourhood
-The graph below visualizes the number of venues by neighbourhood. Looking at two of the neighbourhoods<br>
-with the highest incomes, Lawrence Park South & North, we notice that the number of venues is relatively<br>
+The graph below visualizes the number of venues by neighbourhood. Looking at two of the neighbourhoods
+with the highest incomes, Lawrence Park South & North, we notice that the number of venues is relatively
 small compared to the others. Forest Hill North & South are similar neighbourhoods.
 
-**Note**: Due to the cap of 100 venues in the Foursquare API endpoint "explore", it is not possible<br>
+**Note**: Due to the cap of 100 venues in the Foursquare API endpoint "explore", it is not possible
 to retrieve more. 
 
 
@@ -1550,11 +1554,11 @@ count_plt.figure.savefig('toronto_ven_by_nbh.png')
 
 ### Which machine learning algorithm to use?
 
-The goal of for this project was to provide a (future) business owner with business location information<br>
-for making a more informed decision. Looking a possible suitable machine learning algorithms, I have chosen to<br> focus on either a recommender system or using K-Means clustering for the solution. 
+The goal of for this project was to provide a (future) business owner with business location information
+for making a more informed decision. Looking a possible suitable machine learning algorithms, I have chosen to focus on either a recommender system or using K-Means clustering for the solution. 
 
-After long thought on which machine learning algorithm to use, I have decided to use the K-Means<br>
-clustering algorithm to provide better insight. Along with the other exploratory data analysis, it should be<br>
+After long thought on which machine learning algorithm to use, I have decided to use the K-Means
+clustering algorithm to provide better insight. Along with the other exploratory data analysis, it should be
 possible to categorize the clusters as found by the K-Means clustering algorithm.
 
 ### The first step in preparing for the K-Means algorithm:

@@ -1,5 +1,5 @@
 ---
-title: "Capstone Project"
+title: "Battle of the Neighbourhoods"
 date: 2019-02-23
 tags: [data science, data wrangling, python, geo-location]
 header:
@@ -9,11 +9,12 @@ mathjax: "true"
 ---
 Image by Rohan Makhecha on Unsplash
 
-## Battle of the Neighbourhoods
-Using unsupervised machine learning to categorize neighbourhoods for locating
-certain businesses in the city of Toronto.
+## Capstone Project - Battle of the Neighbourhoods
+Using unsupervised machine learning to categorize neighbourhoods to 
+provide additonal information as to where to locate certain businesses 
+in the city of Toronto.
 
-Project uses: Python, Jupyter Notebook, Geo-location
+Using: Python, Jupyter Notebook, statistical and spatial data
 
 ## Contents
 * [Introduction: Business Problem](#intro)
@@ -54,6 +55,8 @@ As the types of small businesses are manifold, this project will restrict the de
   the (future) business owner to make a more informed decision**
 
 **Note**: only further analysis in the next stage after gathering the data will prove which machine learning method is better suited to use
+
+Staring off with importing the necessary Python libraries and setting pandas display options
 
 
 ```python
@@ -107,8 +110,11 @@ I have chosen to look at the neighbourhoods in the former city of Toronto for th
  They represent municipal planning areas as well as areas for public service like public health.
  A neighbourhood has a population roughly between 7,000 and 12,00 people.
 
-### Example data:
-
+### Spatial data on the neighbourhoods of Toronto:
+ * Using geopandas read_file method to convert a Shapefile into a dataframe format
+ * Rename columns to be consistent when joining dataframes later on
+ * Use geopandas centroid method to determine the geo-coordinaties of the center of a neighbourhood
+ * Display the first few rows and the number of rows and columns of the dataframe
 
 ```python
 # convert the neighbourhood's boundaries shapefile to a geopandas dataframe
@@ -202,7 +208,7 @@ df_toronto_nbh_geo.head()
 </table>
 </div>
 
-
+<br>
 
 **Note**:In the case of the neighbourhoods geospatial data no data cleansing is necessary, other than removing
 removing the CDN number from the description. I have renamed the columns to be consistent.

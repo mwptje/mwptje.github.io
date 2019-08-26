@@ -924,7 +924,7 @@ SELECT stations.start_station_name, stations.start_hour, stations.label
 
 
 
-* The mean squared error of 2.833299 has improved compared to the previous model evaluation : 3.900408
+* The mean squared error of 3.491311 has slightly improved compared to the previous model evaluation : 3.900408
 * The r2_score has not improved: 0.10704 compared to the previous value 0.202602
 
 It looks like this hasn't improved the results

@@ -3,7 +3,7 @@ title: "Stocking Rental Bikes"
 date: 2019-02-23
 tags: [data science, bigquery, python, Kaggle]
 header:
-  image: "/images/kaggle-bq-exercise_files/baden_baden_panorama_2.jpg"
+  image: "/images/kagggle-bq-exercise_files/kaggle-bq-exercise_23_0.png
 excerpt: "Data Science, Google Cloud, BigQuery, Python, Kaggle"
 mathjax: "true"
 ---
@@ -18,6 +18,8 @@ The exercise that goes along with it can be found [here](https://www.kaggle.com/
 
 The problem to solve is the following:<br>
 "**You stock bikes for a bike rental company in Austin, ensuring stations have enough bikes for all their riders. You want to build a model to predict how many riders will start from each station during each hour, capturing patterns in seasonality, time of day, day of the week, etc.**"
+
+To solve this a kaggle kernel was created using Googles BigQuery in order to explore the data provided and to create a model using linear regression to predict bicycle usage by bike shareing station.
 
 To get started, create a project in GCP and connect to it by running the code cell below. Make sure you have connected the kernel to your GCP account in Settings by enabling BigQuery.
 
@@ -530,7 +532,7 @@ plt.show()
 ```
 
 
-![png](/images/kaggle-bq-exercise_files/kaggle-bq-exercise_23_0.png)
+![png](/images/kagggle-bq-exercise_files/kaggle-bq-exercise_23_0.png)
 
 
 ### 6 - Exercise looking at predictions
@@ -622,7 +624,7 @@ plt.show()
 ```
 
 
-![png](/images/kaggle-bq-exercise_files/kaggle-bq-exercise_28_0.png)
+![png](/images/kagggle-bq-exercise_files/kaggle-bq-exercise_28_0.png)
 
 
 ### 8 - What do your results tell you?

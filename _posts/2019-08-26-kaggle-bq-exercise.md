@@ -3,7 +3,7 @@ title: "Stocking Rental Bikes"
 date: 2019-08-26
 tags: [data science, bigquery, python, Kaggle]
 header:
-  image: "/images/kagggle-bq-exercise_files/kaggle-bq-exercise_23_0.png
+  image: "/images/kagggle-bq-exercise_files/kaggle-bq-exercise_23_0.png"
 excerpt: "Data Science, Google Cloud, BigQuery, Python, Kaggle"
 mathjax: "true"
 ---

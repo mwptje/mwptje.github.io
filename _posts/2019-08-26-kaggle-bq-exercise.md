@@ -4,7 +4,6 @@ date: 2019-02-23
 tags: [data science, bigquery, python, Kaggle]
 header:
   image: "/images/kaggle-bq-exercise_files/baden_baden_panorama_2.jpg"
-tags: [data science, bigquery, python, kaggle]
 excerpt: [Data Science, Google Cloud, BigQuery, Python, Kaggle]
 mathjax: "true"
 ---

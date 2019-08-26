@@ -1,6 +1,6 @@
 ---
 title: "Stocking Rental Bikes"
-date: 2019-02-23
+date: 2019-08-26
 tags: [data science, bigquery, python, Kaggle]
 header:
   image: "/images/kagggle-bq-exercise_files/kaggle-bq-exercise_23_0.png
@@ -22,8 +22,6 @@ The problem to solve is the following:<br>
 To solve this a kaggle kernel was created using Googles BigQuery in order to explore the data provided and to create a model using linear regression to predict bicycle usage by bike shareing station.
 
 To get started, create a project in GCP and connect to it by running the code cell below. Make sure you have connected the kernel to your GCP account in Settings by enabling BigQuery.
-
-
 
 ```python
 # Set your own project id here

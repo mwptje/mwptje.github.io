@@ -8,10 +8,12 @@ tags: [data science, bigquery, python, kaggle]
 excerpt: [Data Science, Google Cloud, BigQuery, Python, Kaggle]
 mathjax: "true"
 ---
- ## Stocking rental bikes
+## Stocking rental bikes
 
 <img src="https://images.unsplash.com/photo-1559835557-7766a856e6ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" width="800" height="600" />
+
 **Photo by Kelly Sikkema on Unsplash**
+
 This exercise is based on Rachel Tatman's tutorial on GCP's BigQuery machine learning option [tutorial](https://www.kaggle.com/rtatman/bigquery-machine-learning-tutorial). 
  
 The exercise that goes along with it can be found [here](https://www.kaggle.com/rtatman/bigquery-machine-learning-exercise).

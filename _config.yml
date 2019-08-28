@@ -12,7 +12,7 @@ locale                   : "en-US"
 title                    : "Marc van der Valk" # changed
 title_separator          : "-"
 name                     : "Marc van der Valk"
-description              : "Python - Data Science Portfolio" #changed
+description              : "Python & Data Science Portfolio" #changed
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -86,7 +86,7 @@ analytics:
 author:
   name             : "Marc van der Valk" # changed
   avatar           : "/images/bio-pic.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Python - Data Science Portfolio" #changed
+  bio              : "Python & Data Science Portfolio" #changed
   location         : "Netherlands" # changed
   email            :
   uri              :

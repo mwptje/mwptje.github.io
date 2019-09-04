@@ -12987,6 +12987,7 @@ ul.typeahead-list  > li > a.pull-right {
 .highlight .m { color: #666666 } /* Literal.Number */
 .highlight .s { color: #BA2121 } /* Literal.String */
 .highlight .n { color: #444444 }
+.highlight .p { color: #222222 }
 .highlight .na { color: #7D9029 } /* Name.Attribute */
 .highlight .nb { color: #008000 } /* Name.Builtin */
 .highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
@@ -13383,7 +13384,7 @@ The map will used the geo-coordinates in the file to display the boundaries of e
 <li><code>geo_data="data/groningen_buurten.json"</code> -&gt; the name and path of the GeoJson file</li>
 <li><code>data=df_grun</code> -&gt; the geopandas dataframe containing addtional information of each neighbourhood<br>
 like the population density and number of inhabitants</li>
-<li><code>columns=\['BU_CODE','BEV_DICHTH'\]</code> -&gt; we are using the neighbourhood code and population density<br>
+<li><code>columns=['BU_CODE','BEV_DICHTH']</code> -&gt; we are using the neighbourhood code and population density<br>
 to display the density by color code</li>
 <li><code>tiles='OpenStreetMap'</code> -&gt; use the open street map background</li>
 <li><code>key_on='feature.properties.BU_CODE'</code> -&gt; this is the propertie in the GeoJson file to look for<br>
